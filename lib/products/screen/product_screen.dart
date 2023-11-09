@@ -1,10 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:product_kart/products_products/model/product_model.dart';
-import 'package:product_kart/products_products/screen/add_product_screen.dart';
-import 'package:product_kart/products_products/screen/product_detail_screen.dart';
-import 'package:product_kart/products_products/screen/update_product_screen.dart';
-import 'package:product_kart/products_products/service/product_service.dart';
+import 'package:product_kart/products/model/product_model.dart';
+import 'package:product_kart/products/screen/add_product_screen.dart';
+import 'package:product_kart/products/screen/product_detail_screen.dart';
+import 'package:product_kart/products/screen/update_product_screen.dart';
+import 'package:product_kart/products/service/product_service.dart';
+
 
 class ProductScreen extends StatefulWidget {
   const ProductScreen({super.key});
@@ -17,20 +18,24 @@ class _ProductScreenState extends State<ProductScreen> {
   late ProductService productService;
   List<ProductModel> productList = [];
   String? error;
+  bool isLoading = false;
 
 
   Future getProducts() async {
     try {
+      isLoading = true;
       setState(() {});
 
       productService = ProductService();
       productList = await productService.getProduct();
     } catch (e) {
+
       error = e.toString();
       if (kDebugMode) {
         print(error);
       }
     }
+    isLoading = false;
     setState(() {});
   }
 
@@ -61,7 +66,11 @@ class _ProductScreenState extends State<ProductScreen> {
            icon: const Icon(Icons.add)),
         ],
       ),
-      body:ListView.builder(
+      body:isLoading?
+      const Center(
+        child: CircularProgressIndicator(),
+      ):
+      ListView.builder(
       itemCount: productList.length,
       itemBuilder: (context, index) {
         ProductModel productModel = productList[index];
@@ -103,6 +112,7 @@ class _ProductScreenState extends State<ProductScreen> {
                     IconButton(
                       onPressed: () async {
                         setState(() {
+                          isLoading = true;
                         });
                         try {
                           await productService
@@ -114,6 +124,7 @@ class _ProductScreenState extends State<ProductScreen> {
                           }
                         } finally {
                           setState(() {
+                            isLoading = false;
                           });
                         }
                       },
