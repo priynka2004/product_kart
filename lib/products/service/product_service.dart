@@ -3,8 +3,9 @@ import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 import 'package:product_kart/api_endpoint.dart';
-import 'package:product_kart/products_products/model/product_model.dart';
-import 'package:product_kart/products_products/screen/product_response.dart';
+import 'package:product_kart/products/model/product_model.dart';
+import 'package:product_kart/products/screen/product_response.dart';
+
 
 class ProductService {
   Future<List<ProductModel>> getProduct() async {
