@@ -1,7 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:product_kart/products_products/model/product_model.dart';
-import 'package:product_kart/products_products/service/product_service.dart';
+import 'package:product_kart/products/model/product_model.dart';
+import 'package:product_kart/products/service/product_service.dart';
+
 
 class UpdateProduct extends StatefulWidget {
   final ProductModel productModel;
@@ -53,46 +54,51 @@ class _UpdateProductState extends State<UpdateProduct> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            TextFormField(
-              controller: imageController,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Image',
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              TextFormField(
+                controller: imageController,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Image',
+                ),
               ),
-            ),
-            TextFormField(
-              controller: nameController,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Name',
+              const SizedBox(height: 16,),
+              TextFormField(
+                controller: nameController,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Name',
+                ),
               ),
-            ),
-            TextFormField(
-              controller: priceController,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Price',
+              const SizedBox(height: 16,),
+              TextFormField(
+                controller: priceController,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Price',
+                ),
               ),
-            ),
-            TextFormField(
-              controller: descriptionController,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Description',
+              const SizedBox(height: 16,),
+              TextFormField(
+                controller: descriptionController,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Description',
+                ),
               ),
-            ),
-            ElevatedButton(
-              onPressed: () async {
-                update();
-                Navigator.pop(context);
-              },
-              child: const Text('Update Product'),
-            ),
-            const SizedBox(),
-          ],
+              const SizedBox(height: 16,),
+              ElevatedButton(
+                onPressed: () async {
+                  update();
+                  Navigator.pop(context);
+                },
+                child: const Text('Update Product'),
+              ),
+              const SizedBox(),
+            ],
+          ),
         ),
       ),
     );
