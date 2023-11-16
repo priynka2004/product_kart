@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
-import 'package:product_kart/api_endpoint.dart';
+import 'package:product_kart/shared/api_endpoint.dart';
 import 'package:product_kart/products/model/product_model.dart';
 import 'package:product_kart/products/screen/product_response.dart';
 
@@ -52,9 +52,7 @@ class ProductService {
       final data = jsonDecode(body);
       print(data);
     } else {
-      // Error handling here
       print('Something went wrong');
-      // You can throw an exception or handle the error as needed.
     }
   }
 

@@ -16,10 +16,8 @@ class ProductScreen extends StatefulWidget {
 }
 
 class _ProductScreenState extends State<ProductScreen> {
-
   late ProductProvider productProvider;
 
-  //
   // Future getProducts() async {
   //   try {
   //     isLoading = true;
@@ -129,8 +127,9 @@ class _ProductScreenState extends State<ProductScreen> {
                                   onPressed: () async {
                                     provider.isLoading = true;
                                     try {
-                                      await productProvider.productService.deleteProduct(
-                                          productModel.sId.toString());
+                                      await productProvider.productService
+                                          .deleteProduct(
+                                              productModel.sId.toString());
                                       await provider.fetchProduct();
                                     } catch (e) {
                                       if (kDebugMode) {
@@ -152,7 +151,8 @@ class _ProductScreenState extends State<ProductScreen> {
                             ListTile(
                               title: Text('Name : ${productModel.name}'),
                               subtitle: Text(
-                                  "Price : ${productModel.price.toString()}"),
+                                "Price : ${productModel.price.toString()}",
+                              ),
                             ),
                           ],
                         ),

@@ -1,13 +1,13 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:product_kart/products/model/product_model.dart';
-import 'package:product_kart/products/service/product_service.dart';
-
+import 'package:product_kart/provider/product_provider.dart';
+import 'package:provider/provider.dart';
 
 class UpdateProduct extends StatefulWidget {
   final ProductModel productModel;
 
-  const UpdateProduct({super.key, required this.productModel});
+  const UpdateProduct({Key? key, required this.productModel}) : super(key: key);
 
   @override
   State<UpdateProduct> createState() => _UpdateProductState();
@@ -36,9 +36,10 @@ class _UpdateProductState extends State<UpdateProduct> {
         imgUrl: imageController.text,
         price: int.parse(priceController.text),
         description: descriptionController.text);
+
     try {
-      ProductService productService = ProductService();
-      await productService.updateProduct(productModel);
+      ProductProvider productProvider = Provider.of<ProductProvider>(context, listen: false);
+      await productProvider.updateProduct(productModel);
     } catch (e) {
       if (kDebugMode) {
         print('Error: $e');
@@ -74,6 +75,7 @@ class _UpdateProductState extends State<UpdateProduct> {
               ),
               const SizedBox(height: 16,),
               TextFormField(
+                keyboardType: TextInputType.number,
                 controller: priceController,
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),
@@ -91,7 +93,7 @@ class _UpdateProductState extends State<UpdateProduct> {
               const SizedBox(height: 16,),
               ElevatedButton(
                 onPressed: () async {
-                  update();
+                  await update();
                   Navigator.pop(context);
                 },
                 child: const Text('Update Product'),
