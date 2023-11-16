@@ -18,31 +18,6 @@ class ProductScreen extends StatefulWidget {
 class _ProductScreenState extends State<ProductScreen> {
   late ProductProvider productProvider;
 
-  // Future getProducts() async {
-  //   try {
-  //     isLoading = true;
-  //     setState(() {});
-  //
-  //     productService = ProductService();
-  //     productList = await productService.getProduct();
-  //   } catch (e) {
-  //
-  //     error = e.toString();
-  //     if (kDebugMode) {
-  //       print(error);
-  //     }
-  //   }
-  //   isLoading = false;
-  //   setState(() {});
-  // }
-  //
-  // @override
-  // void initState() {
-  //   productService = ProductService();
-  //   getProducts();
-  //   super.initState();
-  // }
-
   @override
   void initState() {
     productProvider = Provider.of<ProductProvider>(context, listen: false);
